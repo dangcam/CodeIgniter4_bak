@@ -41,6 +41,7 @@ require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstra
 require_once SYSTEMPATH . 'Config/DotEnv.php';
 (new CodeIgniter\Config\DotEnv(ROOTPATH))->load();
 
+require_once("define_constant.php");
 /*
  * ---------------------------------------------------------------
  * GRAB OUR CODEIGNITER INSTANCE
