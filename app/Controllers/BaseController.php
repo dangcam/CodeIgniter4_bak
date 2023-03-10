@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+namespace App\Libraries;
 
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
@@ -46,14 +47,33 @@ abstract class BaseController extends Controller
     /**
      * Constructor.
      */
+    private $auth;
+    private $session;
+
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
+        $this->session = \Config\Services::session();
+        date_default_timezone_set(TIME_ZONE);
+        //$this->auth = $this->dc_authentication->check();
+        //if($this->auth == null)	{$this->dc_utils->dc_redirect(DC_BASE_URL.'login');}
+        /*if(!$this->session->userdata('site_lang')){
+            $this->session->set_userdata('site_lang',DC_DEFAULT_LANGUAGE);
+        }*/
+        //$this->listFunctions = $this->site_model->getFuntionUser($this->session->userdata('username'));
+        //$this->lang->load("dc",$this->session->userdata('site_lang'));
+        //$this->m = strtolower($this->router->fetch_class());
+        //$this->v = strtolower($this->router->fetch_method());
+        //$this->data['m']= $this->m;
+        //$this->data['v'] = $this->v;
+    }
 
-        // Preload any models, libraries, etc, here.
 
-        // E.g.: $this->session = \Config\Services::session();
+    function page_construct($page, $meta = array(), $data = array()) {
+        echo view('layout/header')
+            . view($page)
+            . view('layout/footer');
     }
 
 }
